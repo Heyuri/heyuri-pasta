@@ -99,15 +99,7 @@ location ^~ /private/ {
 }
 ```
 
-**Apache** — add inside your `<VirtualHost>` block:
-
-```apache
-<Directory /var/www/sites/yoursite/heyuri-pasta/private>
-    Require all denied
-</Directory>
-```
-
-Or create `private/.htaccess`:
+**Apache** — create `private/.htaccess` and add to its contents:
 
 ```apache
 Require all denied
