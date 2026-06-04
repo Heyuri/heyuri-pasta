@@ -1,0 +1,18 @@
+{
+    "name": "heyuri/heyuri-pasta",
+    "require": {
+        "php": "^8.4",
+        "heyuri/puchiko": "dev-main"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Heyuri/Puchiko"
+        }
+    ],
+    "autoload": {
+        "classmap": ["source/"]
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
