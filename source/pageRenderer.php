@@ -47,6 +47,7 @@ class pageRenderer {
             'PAGE_TITLE'         => $this->config['site']['name'],
             'MAIN_PAGE_SUBTITLE' => $this->config['site']['subtitle'],
             'STATIC_URL'         => $staticUrl,
+            'FAVICON_NAME'       => $this->config['site']['favicon_name'] ?? 'favicon.png',
             'NEW_PASTE_URL'      => '?route=newPasta',
             'EXTRA_SCRIPTS'      => $extraScripts,
             'CONTENT'            => $content,

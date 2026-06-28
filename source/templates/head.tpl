@@ -4,6 +4,7 @@
     <meta name="description" content="{$PASTA_TITLE}">
     <link class="linkstyle" rel="stylesheet" href="{$STATIC_URL}css/base.css">
     <link class="linkstyle" rel="stylesheet" href="{$STATIC_URL}css/sakomoto.css">
+    <link rel="shortcut icon" href="{$STATIC_URL}image/{$FAVICON_NAME}">
     <title>{$PASTA_TITLE}</title>
     {$EXTRA_SCRIPTS}
 </head>
