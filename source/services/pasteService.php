@@ -4,7 +4,10 @@ class pasteService {
 
     public function __construct(private pasteRepository $pasteRepository) {}
 
-    public function createPaste(string $title, string $content, int $timeToLive, string $ipAddress): string {
+    public function createPaste(string $title, string $content, int $timeToLive, string $ipAddress, array $allowedTimesToLive): string {
+        if (!in_array($timeToLive, $allowedTimesToLive, true)) {
+            throw new InvalidArgumentException('Invalid time to live.');
+        }
         $uuid = $this->generateUuid();
         $this->pasteRepository->insertPaste($uuid, $title, $content, $timeToLive, $ipAddress);
         return $uuid;

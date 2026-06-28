@@ -51,7 +51,15 @@ class createPasta {
             return;
         }
 
-        $uuid = $this->routeContext->getPasteService()->createPaste($title, $content, $ttl, $ip);
+        $allowedTtls = array_map('intval', array_values($this->routeContext->config['times_to_live'] ?? []));
+
+        try {
+            $uuid = $this->routeContext->getPasteService()->createPaste($title, $content, $ttl, $ip, $allowedTtls);
+        } catch (InvalidArgumentException) {
+            http_response_code(400);
+            echo $this->routeContext->renderer->renderPage('<p>Invalid time to live.</p>');
+            return;
+        }
 
         // Remember the chosen TTL so it is pre-selected on future pastes.
         setcookie('preferred_ttl', (string) $ttl, [
