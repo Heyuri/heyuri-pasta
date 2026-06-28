@@ -12,9 +12,12 @@ class newPasta {
         $times    = $this->routeContext->config['times_to_live'];
         $pasteCfg = $this->routeContext->config['paste'] ?? [];
 
+        $preferredTtl = isset($_COOKIE['preferred_ttl']) ? (int) $_COOKIE['preferred_ttl'] : null;
+
         $options = '';
         foreach ($times as $label => $value) {
-            $options .= '<option value="' . sanitizeStr($value) . '">'
+            $selected = ($preferredTtl !== null && (int) $value === $preferredTtl) ? ' selected' : '';
+            $options .= '<option value="' . sanitizeStr($value) . '"' . $selected . '>'
                 . sanitizeStr($this->formatTimeToLiveLabel($label))
                 . '</option>';
         }

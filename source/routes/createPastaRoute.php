@@ -53,6 +53,13 @@ class createPasta {
 
         $uuid = $this->routeContext->getPasteService()->createPaste($title, $content, $ttl, $ip);
 
+        // Remember the chosen TTL so it is pre-selected on future pastes.
+        setcookie('preferred_ttl', (string) $ttl, [
+            'expires'  => time() + 31536000,
+            'path'     => '/',
+            'samesite' => 'Lax',
+        ]);
+
         header('Location: ?route=viewPasta&id=' . urlencode($uuid));
         exit;
     }
