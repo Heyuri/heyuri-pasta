@@ -18,16 +18,17 @@ class pageRenderer {
         return [
             'MENU_HOME'      => '<a href="' . $homeUrl . '">Home</a>',
             'MENU_INDEX'     => $link('?route=mainRoute',     'Index',     $activeRoute === 'mainRoute'),
-            'MENU_NEW_PASTA' => $link('?route=newPasta#pastaForm',      'New paste', $activeRoute === 'newPasta'),
+            'MENU_NEW_PASTA' => $link('?route=newPasta',      'New paste', $activeRoute === 'newPasta'),
             'MENU_MODERATE'  => $link('?route=moderateRoute', 'Moderate',  $activeRoute === 'moderateRoute'),
         ];
     }
 
-    public function renderViewPaste(string $title, string $content): string {
+    public function renderViewPaste(string $title, string $content, string $createdAt = ''): string {
         $staticUrl = $this->config['server']['url'] . 'static/';
         $this->templateEngine->clear()->bind([
             'PASTE_TITLE'   => $title,
             'PASTE_CONTENT' => $content,
+            'PASTE_CREATED' => $createdAt,
         ]);
         $pasteContent = $this->templateEngine->render('viewPaste');
 

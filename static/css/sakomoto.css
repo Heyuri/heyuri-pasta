@@ -29,6 +29,8 @@
 	--color-bg-postblock: #eeaa88;
 	--color-border-input: #aaaaaa;
 	--color-fg-global-message: var(--color-fg-warning);
+	/* Paste */
+	--color-bg-paste-content: white;
 }
 
 body {

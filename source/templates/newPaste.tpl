@@ -7,7 +7,7 @@
                         Title
                     </td>
                     <td>
-                        <input type="text" name="title" placeholder="Enter a title...">
+                        <input type="text" name="title" maxlength="{$TITLE_MAX_LENGTH}" placeholder="Enter a title...">
                     </td>
                 </tr>
                 <tr>
@@ -15,7 +15,7 @@
                         Text
                     </td>
                     <td>
-                        <textarea class="pasteContentInput" name="content" placeholder="Enter your pasta content here."></textarea>
+                        <textarea class="pasteContentInput" name="content" maxlength="{$CONTENT_MAX_LENGTH}" placeholder="Enter your pasta content here."></textarea>
                     </td>
                 </tr>
                 <tr>

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS pastes (
     uuid CHAR(36) NOT NULL UNIQUE,
     title TEXT NOT NULL,
     time_to_live INTEGER NOT NULL,
-    content TEXT NOT NULL,
+    content MEDIUMTEXT NOT NULL,
     ip_address VARCHAR(45) NOT NULL DEFAULT '',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

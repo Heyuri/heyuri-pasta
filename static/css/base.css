@@ -38,10 +38,14 @@ body {
 
 .pasteContentInput {
     width: 100em;
-    height: 50em;
+    height: 25em;
     max-width: 100%;
 }
 
+#pasteContent {
+    background-color: var(--color-bg-paste-content);
+    border: 1px dotted;
+}
 
 /************************ Mod tools **************************************/
 

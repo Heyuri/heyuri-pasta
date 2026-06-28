@@ -18,7 +18,8 @@ class viewPasta {
 
         $content = $this->routeContext->renderer->renderViewPaste(
             sanitizeStr($paste['title']),
-            sanitizeStr($paste['content'])
+            sanitizeStr($paste['content']),
+            sanitizeStr($paste['created_at'])
         );
 
         echo $content;

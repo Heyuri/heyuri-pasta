@@ -109,8 +109,8 @@ Require all denied
 
 ### 8. Set up the expiry cron job
 
-Pastes with a TTL are pruned hourly. Run `crontab -e` and add:
+Pastes with a TTL are pruned every 5 minutes. Run `crontab -e` and add:
 
 ```
-0 * * * * php /var/www/sites/yoursite/heyuri-pasta/private/cron/pruneExpiredPastes.php >> /var/www/sites/yoursite/heyuri-pasta/private/prune.log 2>&1
+*/5 * * * * php /var/www/sites/yoursite/heyuri-pasta/private/cron/pruneExpiredPastes.php >> /var/www/sites/yoursite/heyuri-pasta/private/prune.log 2>&1
 ```

@@ -9,7 +9,8 @@ class newPasta {
     public function __construct(private routeContext $routeContext) {}
 
     public function invoke(): void {
-        $times = $this->routeContext->config['times_to_live'];
+        $times    = $this->routeContext->config['times_to_live'];
+        $pasteCfg = $this->routeContext->config['paste'] ?? [];
 
         $options = '';
         foreach ($times as $label => $value) {
@@ -23,6 +24,8 @@ class newPasta {
         $content = $engine->render('newPaste', [
             'CREATE_PASTE_HEADER' => 'New pasta',
             'EXPIRE_TIMES'        => $expireSelect,
+            'CONTENT_MAX_LENGTH'  => max(1, (int) ($pasteCfg['max_length'] ?? 4194303)),
+            'TITLE_MAX_LENGTH'    => max(1, (int) ($pasteCfg['title_max_length'] ?? 255)),
         ]);
 
         echo $this->routeContext->renderer->renderPage($content);

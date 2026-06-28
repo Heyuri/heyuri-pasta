@@ -16,10 +16,17 @@ class createPasta {
             return;
         }
 
-        $pasteCfg  = $this->routeContext->config['paste'] ?? [];
-        $minLength = max(1,    (int) ($pasteCfg['min_length'] ?? 1));
-        $maxLength = max(1,    (int) ($pasteCfg['max_length'] ?? 10000));
-        $len       = mb_strlen($content, 'UTF-8');
+        $pasteCfg     = $this->routeContext->config['paste'] ?? [];
+        $minLength    = max(1, (int) ($pasteCfg['min_length'] ?? 1));
+        $maxLength    = max(1, (int) ($pasteCfg['max_length'] ?? 10000));
+        $titleMaxLen  = max(1, (int) ($pasteCfg['title_max_length'] ?? 255));
+        $len          = mb_strlen($content, 'UTF-8');
+
+        if (mb_strlen($title, 'UTF-8') > $titleMaxLen) {
+            http_response_code(400);
+            echo $this->routeContext->renderer->renderPage('<p>Title is too long (maximum ' . $titleMaxLen . ' characters).</p>');
+            return;
+        }
 
         if ($len < $minLength) {
             http_response_code(400);
