@@ -1,6 +1,7 @@
 <?php
 
 // start the session first, with hardened cookie flags
+session_name('heyuri_pasta');
 session_set_cookie_params([
     'httponly' => true,
     'secure'   => !empty($_SERVER['HTTPS']),
