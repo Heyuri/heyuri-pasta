@@ -33,4 +33,7 @@ $stmt = $pdo->prepare(
 $stmt->execute();
 
 $deleted = $stmt->rowCount();
-echo '[' . date('Y-m-d H:i:s') . '] Pruned ' . $deleted . ' expired paste(s).' . PHP_EOL;
+
+if($deleted > 0) {
+    echo '[' . date('Y-m-d H:i:s') . '] Pruned ' . $deleted . ' expired paste(s).' . PHP_EOL;
+}
