@@ -1,6 +1,11 @@
 <?php
 
-// start the session first
+// start the session first, with hardened cookie flags
+session_set_cookie_params([
+    'httponly' => true,
+    'secure'   => !empty($_SERVER['HTTPS']),
+    'samesite' => 'Lax',
+]);
 session_start();
 
 use Puchiko\request\request;

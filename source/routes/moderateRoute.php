@@ -11,6 +11,14 @@ class moderateRoute {
     public function invoke(): void {
         $req = $this->routeContext->request;
 
+        // Refresh role from the DB *before* dispatching any action, so a
+        // revoked/demoted session can never authorize a privileged POST on a
+        // stale cached role.
+        if ($this->isLoggedIn()) {
+            $info = $this->routeContext->getModService()->getModInfo($_SESSION['mod_user']);
+            $_SESSION['mod_role'] = is_array($info) ? ($info['role'] ?? 'mod') : 'mod';
+        }
+
         if ($req->isPost()) {
             $action = $req->getParameter('action', 'POST', '');
             if ($action === 'login') {
@@ -30,13 +38,9 @@ class moderateRoute {
             }
         }
 
-        if (empty($_SESSION['mod_user'])) {
+        if (!$this->isLoggedIn()) {
             echo $this->routeContext->renderer->renderPage($this->renderLoginForm(), 'moderateRoute');
         } else {
-            // Always refresh role from DB so stale sessions never get wrong permissions
-            $info = $this->routeContext->getModService()->getModInfo($_SESSION['mod_user']);
-            $_SESSION['mod_role'] = is_array($info) ? ($info['role'] ?? 'mod') : 'mod';
-
             $subpage = $req->getParameter('subpage', 'GET', 'pastes');
             if ($subpage === 'account') {
                 echo $this->routeContext->renderer->renderPage($this->renderAccountPage(), 'moderateRoute');
@@ -75,7 +79,7 @@ class moderateRoute {
     }
 
     private function handleChangePassword(): void {
-        if (empty($_SESSION['mod_user'])) {
+        if (!$this->isLoggedIn()) {
             http_response_code(403);
             exit;
         }
@@ -196,7 +200,7 @@ class moderateRoute {
     }
 
     private function handleDelete(): void {
-        if (empty($_SESSION['mod_user'])) {
+        if (!$this->isLoggedIn()) {
             http_response_code(403);
             exit;
         }
@@ -386,6 +390,12 @@ class moderateRoute {
             'SHOW_ACCOUNTS_LINK'   => $this->isAdmin(),
             'SHOW_ACCOUNTS_BOLD'   => false,
         ]);
+    }
+
+    private function isLoggedIn(): bool {
+        // Note: a deliberate string check, not empty() — a username of "0" is
+        // valid but would be falsy under empty().
+        return isset($_SESSION['mod_user']) && $_SESSION['mod_user'] !== '';
     }
 
     private function isAdmin(): bool {
