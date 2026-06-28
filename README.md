@@ -10,7 +10,7 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourorg/heyuri-pasta.git /var/www/sites/yoursite/heyuri-pasta
+git clone https://github.com/Heyuri/heyuri-pasta.git /var/www/sites/yoursite/heyuri-pasta
 cd /var/www/sites/yoursite/heyuri-pasta
 ```
 
