@@ -112,7 +112,5 @@ Require all denied
 Pastes with a TTL are pruned hourly. Run `crontab -e` and add:
 
 ```
-0 * * * * php /var/www/sites/yoursite/heyuri-pasta/private/cron/pruneExpiredPastes.php >> /var/log/heyuri-pasta-prune.log 2>&1
+0 * * * * php /var/www/sites/yoursite/heyuri-pasta/private/cron/pruneExpiredPastes.php >> /var/www/sites/yoursite/heyuri-pasta/private/prune.log 2>&1
 ```
-
-Ensure the log file is writable by the cron user, or replace the redirect with `>/dev/null 2>&1` if you don't need logs.
