@@ -9,7 +9,6 @@ class moderateRoute {
     public function __construct(private routeContext $routeContext) {}
 
     public function invoke(): void {
-        session_start();
         $req = $this->routeContext->request;
 
         if ($req->isPost()) {

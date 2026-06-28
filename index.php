@@ -1,5 +1,8 @@
 <?php
 
+// start the session first
+session_start();
+
 use Puchiko\request\request;
 
 require_once __DIR__ . '/vendor/autoload.php';
