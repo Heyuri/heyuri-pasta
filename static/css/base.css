@@ -65,6 +65,7 @@ body {
 #pasteContent {
     background-color: var(--color-bg-paste-content);
     border: 1px dotted;
+	overflow-x: scroll;
 }
 
 /************************ Mod tools **************************************/
